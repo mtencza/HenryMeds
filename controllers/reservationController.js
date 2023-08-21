@@ -44,20 +44,22 @@ async function reserve(providerid, clientid, start_time, end_time) {
 
 async function confirm(reservationid) {
     try {
-        const reservation = await Reservation.findByPk(reservationid); 
-        if (!reservation) {
+        const existingReservation = await Reservation.findByPk(reservationid); 
+        if (!existingReservation) {
             throw new Error('Reservation not found');
         }
 
         //Reservations expire after 30 mins if not confirmed
-        if(!withinThirtyMin(reservation.creation_time)) {
+        if(!withinThirtyMin(existingReservation.creation_time)) {
+            //delete reservation
+            await existingReservation.destroy();
             throw new Error('Reservation must be confirmed within 30 minutes');
         }
 
   
-        reservation.confirmed = true;
-        await reservation.save();
-        return reservation;
+        existingReservation.confirmed = true;
+        await existingReservation.save();
+        return existingReservation;
     } catch (error) {
         throw error;
     }
