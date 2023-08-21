@@ -4,7 +4,9 @@ Reservations system
 
 Endpoints:
 POST reservations/schedule
+
 POST reservations/
+
 POST reservations/confirmation
 
 - Allows providers to submit times they’d like to work on the schedule.
