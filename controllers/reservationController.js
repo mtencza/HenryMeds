@@ -1,10 +1,28 @@
 const Reservation = require('../models/reservation');
 
+function isValidReservation(start_time) {
+    const startTime = new Date(start_time).getTime();
+    const currentTime = Date.now();
+    const twentyFourHr = 24 * 60 * 60 * 1000;
 
+    return (startTime - currentTime >= twentyFourHr);
+}
+
+//checks if time passed in is within 30 min of current time
+function withinThirtyMin(time_to_check) {
+    const time = new Date(time_to_check).getTime();
+    const currentTime = Date.now();
+    const thirtyMin = 30 * 60 * 1000;
+
+    return (currentTime - time <= thirtyMin);
+}
 
 async function reserve(providerid, clientid, start_time, end_time) {
     try {
         //Reservations must be made at least 24 hours in advance
+        if(!isValidReservation(start_time)) {
+            throw new Error('Reservation must be made 24 hrs in advance');
+        }
 
         //Valid provider schedule
 
@@ -32,6 +50,9 @@ async function confirm(reservationid) {
         }
 
         //Reservations expire after 30 mins if not confirmed
+        if(!withinThirtyMin(reservation.creation_time)) {
+            throw new Error('Reservation must be confirmed within 30 minutes');
+        }
 
   
         reservation.confirmed = true;
