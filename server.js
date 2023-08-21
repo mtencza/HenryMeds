@@ -72,7 +72,9 @@ app.use(bodyParser.json());
 //set up routing
 const reservationRoutes = require('./routes/reservationRoutes');
 const scheduleRoutes = require('./routes/scheduleRoutes');
-
+app.use('/reservations/confirmation', reservationRoutes);
+app.use('/reservations', reservationRoutes);
+app.use('/reservations/schedule', scheduleRoutes);
 
 // DB connection
 const db = new sequelize(/* { MY_DB_CREDENTIALS } */);

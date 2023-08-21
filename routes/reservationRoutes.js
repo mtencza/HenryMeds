@@ -5,7 +5,6 @@ const router = express.Router();
 
 router.post('/reservations/confirmation', async (req, res) => {
     const reservationid = req.body;
-
     if (!reservationid) {
         res.status(400).json({ error: 'Missing reservationid' });
         return;
@@ -49,10 +48,10 @@ router.post('/reservations', async (req, res) => {
     }
   
     try {
-      const reservation = await reservationController.reserve(providerid, clientid, start_time, end_time);
-      res.status(200).json(reservation);
+        const reservation = await reservationController.reserve(providerid, clientid, start_time, end_time);
+        res.status(200).json(reservation);
     } catch (error) {
-      res.status(500).send(error);
+        res.status(500).send(error);
     }
 });
 

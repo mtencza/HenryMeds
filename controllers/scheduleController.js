@@ -1,6 +1,6 @@
 const Schedule = require('../models/schedule');
 
-//reservations/schedule
+// POST reservations/schedule
 async function schedule(providerid, start_time, end_time) {
     try {
         //Get day from start time
@@ -14,7 +14,7 @@ async function schedule(providerid, start_time, end_time) {
         const providerSchedules = await Schedule.findAll({
           where: {
           providerid: providerid,
-          date: reservationDay,
+          date: scheduleDay,
           },
         });
     

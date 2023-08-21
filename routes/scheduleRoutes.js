@@ -28,10 +28,10 @@ router.post('/reservations/schedule', async (req, res) => {
     }
   
     try {
-      const schedule = await scheduleController.schedule(providerid, start_time, end_time);
-      res.status(200).json(schedule);
+        const schedule = await scheduleController.schedule(providerid, start_time, end_time);
+        res.status(200).json(schedule);
     } catch (error) {
-      res.status(500).send(error);
+        res.status(500).send(error);
     }
   });
 
