@@ -65,6 +65,7 @@ creation_time: timestamp
 const express = require('express');
 const bodyParser = require('body-parser');
 const sequelize = require('sequelize');
+
 const app = express();
 app.use(bodyParser.json());
 
@@ -78,7 +79,6 @@ db.authenticate()
         console.error('DB connect error: ', error);
     });
 
-    
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
