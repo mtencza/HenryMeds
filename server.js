@@ -67,3 +67,19 @@ const bodyParser = require('body-parser');
 const sequelize = require('sequelize');
 const app = express();
 app.use(bodyParser.json());
+
+// DB connection
+const db = new sequelize(/* { MY_DB_CREDENTIALS } */);
+db.authenticate()
+    .then(() => {
+        console.log('DB Connection established');
+    })
+    .catch((error) => {
+        console.error('DB connect error: ', error);
+    });
+
+    
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server listening on port: ${PORT}`);
+});
