@@ -61,3 +61,9 @@ start_time:    timestamp
 end_time:      timestamp
 creation_time: timestamp
 */
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const sequelize = require('sequelize');
+const app = express();
+app.use(bodyParser.json());
