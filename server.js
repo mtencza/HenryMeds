@@ -69,6 +69,11 @@ const sequelize = require('sequelize');
 const app = express();
 app.use(bodyParser.json());
 
+//set up routing
+const reservationRoutes = require('./routes/reservationRoutes');
+const scheduleRoutes = require('./routes/scheduleRoutes');
+
+
 // DB connection
 const db = new sequelize(/* { MY_DB_CREDENTIALS } */);
 db.authenticate()
